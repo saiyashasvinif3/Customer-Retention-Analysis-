@@ -9,7 +9,6 @@ class CUSTOMER_RETENTION:
         print(self.df.shape)
         print(self.df.isnull().sum())
         self.df.drop(columns=['customerID'], inplace=True)
-        print(self.df['TotalCharges'].dtype)
         self.df['TotalCharges'] = pd.to_numeric(self.df['TotalCharges'], errors='coerce')
         print(self.df['TotalCharges'].dtype)
         print(self.df.info())
@@ -94,4 +93,5 @@ if __name__ == "__main__":
     obj =  CUSTOMER_RETENTION(data)
 
     
+
 
