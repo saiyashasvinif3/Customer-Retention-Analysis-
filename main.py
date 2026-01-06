@@ -123,14 +123,10 @@ class CUSTOMER_RETENTION:
             ax.bar_label(container)
         plt.savefig("sim_churn_distribution.png")
         plt.show()
-
-     
-
-# Count of customers for each tenure value
+        
         tenurecounts = self.df['tenure'].value_counts().sort_index()
         plt.figure(figsize=(10,6))
         plt.plot(tenurecounts.index, tenurecounts.values, marker='o', color='blue', linewidth=2)
-# Add labels and title
         plt.xlabel("Tenure (Months)")
         plt.ylabel("Number of Customers")
         for container in ax.containers:
@@ -208,6 +204,7 @@ if __name__ == "__main__":
 
 
     
+
 
 
 
