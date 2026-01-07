@@ -72,6 +72,20 @@ class CUSTOMER_RETENTION:
         plt.savefig("senior_citizen_sim_usage.png")    
         plt.show()
 
+       # Count SIM usage by gender
+       simgendercounts = self.df.groupby(['sim', 'gender']).size().unstack()
+       plt.figure(figsize=(8,5))
+       ax = sim_gender_counts.plot(kind='bar')
+       plt.xlabel("SIM")
+       plt.ylabel("Number of Customers")
+       plt.title("SIM Usage by Gender")
+       plt.xticks(rotation=0)
+       plt.legend(title="Gender")
+       for container in ax.container:
+           ax.bar_label(container)
+       plt.savefig("sim_usage_by_gender.png")
+       plt.show()
+
         #Piechart for knowing which internet service is observed more
         plt.figure(figsize=(6,4))
         plt.pie(self.df['InternetService'].value_counts(), labels=self.df['InternetService'].value_counts().index, autopct='%1.1f%%')
@@ -180,7 +194,41 @@ class CUSTOMER_RETENTION:
         plt.ylabel('Number of Customers')
         plt.title('Customer Distribution by Tenure')
         plt.savefig("tenure_area_chart.png")
+        plt.show
+
+        num_df = self.df.select_dtypes(include=['int64', 'float64'])
+        plt.figure(figsize=(10,6))
+        sns.heatmap( num_df.corr(method='pearson'),annot=True,cmap='coolwarm',fmt=".2f",linewidths=0.5)
+        plt.title("Correlation Heatmap of Numerical Features")
+        plt.savefig("dataset_correlation_heatmap.png")
         plt.show()
+
+        paymentcounts = ( self.df.groupby(['PaymentMethod', 'gender', 'Churn']).size().unstack())
+        ax=paymentcounts.plot(kind='bar', figsize=(10,6))
+        plt.xlabel("Payment Method & Gender")
+        plt.ylabel("Number of Customers")
+        for container in ax.containers:
+            ax.bar_label(container)
+        plt.title("Payment Methods by Gender vs Churn")
+        plt.xticks(rotation=45, ha='right')
+        plt.legend(title="Churn")
+        plt.gca().containers[0]
+        plt.savefig("paymentmethod_gender_churn.png")
+        plt.show()
+        
+        onlinecounts = ( self.df.groupby(['OnlineSecurity', 'gender', 'Churn']).size().unstack())
+        ax=onlinecounts.plot(kind='bar', figsize=(10,6))
+        plt.xlabel("Online Security & Gender")
+        plt.ylabel("Number of Customers")
+        for container in ax.containers:
+            ax.bar_label(container)
+        plt.title("Online Security by Gender vs Churn")
+        plt.xticks(rotation=45, ha='right')
+        plt.legend(title="Churn")
+        plt.gca().containers[0]
+        plt.savefig("online_security_gender_churn.png")
+        plt.show()
+
 
 if __name__ == "__main__":
     data = "Telco_Churn.csv"
@@ -204,6 +252,7 @@ if __name__ == "__main__":
 
 
     
+
 
 
 
