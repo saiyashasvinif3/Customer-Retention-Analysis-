@@ -150,6 +150,18 @@ class CUSTOMER_RETENTION:
         plt.savefig("tenure_line_chart.png")
         plt.show()
 
+        quarter_bins = [0, 3, 6, 9, 12]
+        plt.figure(figsize=(8,5))
+        plt.hist(self.df[self.df['Churn'] == 0]['tenure'], bins=quarter_bins, alpha=0.7, label='No Churn') 
+        plt.hist( self.df[self.df['Churn'] == 1]['tenure'], bins=quarter_bins,alpha=0.7,label='Churn')
+        plt.xlabel("Tenure (Months)")
+        plt.ylabel("Number of Customers")
+        plt.title("Tenure vs Churn (Quarter-wise Histogram)")
+        plt.xticks([1.5, 4.5, 7.5, 10.5], ['Q1', 'Q2', 'Q3', 'Q4'])
+        plt.legend()
+        plt.savefig("tenure_vs_churn_4quarters_histogram.png")
+        plt.show()
+
         plt.figure(figsize=(6,4))
         techcounts = self.df.groupby(['TechSupport', 'Churn']).size().unstack()
         ax=techcounts.plot(kind='bar', figsize=(8,5), color=['skyblue','salmon'])
@@ -252,6 +264,7 @@ if __name__ == "__main__":
 
 
     
+
 
 
 
